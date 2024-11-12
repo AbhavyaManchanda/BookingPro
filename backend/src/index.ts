@@ -1,6 +1,12 @@
+// import { Mongoose } from './../node_modules/mongoose/types/index.d';
 import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
+import mongoose from 'mongoose';
+// const express = require('express');
+
+
+mongoose.connect(process.env.MONGO_CONNECTION as string); 
 
 const app=express();
 app.use(express.json())
