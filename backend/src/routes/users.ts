@@ -7,14 +7,16 @@ import { check, validationResult } from "express-validator";
 
 const router=express.Router();
 
+//if user route is api/user/register then this is used
 router.post("/register", [
-    check("firstName", "First Name is required").isString(),
+    check("firstName", "First Name is required").isString(),//its checking if firstname exists in the body of request..and if it is string
     check("lastName", "Last Name is required").isString(),
     check("email", "Email is required").isEmail(),
     check("password", "Password with 6 or more characters required").isLength({
       min: 6,
     }),
-],async (req: Request, res: Response) =>{
+],
+async (req: Request, res: Response) => {
     
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -32,7 +34,9 @@ router.post("/register", [
         user=new User(req.body);
         await user.save();
 
+
         const token=jwt.sign({userId:user.id},process.env.JWT_SECRET_KEY as string, {expiresIn:"1d"});
+         
 
         res.cookie("auth_token",token,{
             httpOnly:true,
@@ -45,7 +49,7 @@ router.post("/register", [
         console.log(error);
         res.status(500).send({message:"Something went wrong"})
 
-    }
+     }
 
 });
 export default router;

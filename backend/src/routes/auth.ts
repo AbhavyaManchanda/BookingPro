@@ -3,7 +3,7 @@ import {check,validationResult} from "express-validator";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import verifyToken from "../middleware/auth";
+// import verifyToken from "../middleware/auth";
 
 
 
@@ -26,7 +26,8 @@ try {
     if (!user) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
-
+    // to check the password we send for the req matches the password we have for user 
+    
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid Credentials" });
@@ -56,15 +57,15 @@ try {
 }
 );
 
-router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
-    res.status(200).send({ userId: req.userId });
-  });
+// router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+//     res.status(200).send({ userId: req.userId });
+//   });
   
-  router.post("/logout", (req: Request, res: Response) => {
-    res.cookie("auth_token", "", {
-      expires: new Date(0),
-    });
-    res.send();
-  });
+//   router.post("/logout", (req: Request, res: Response) => {
+//     res.cookie("auth_token", "", {
+//       expires: new Date(0),
+//     });
+//     res.send();
+//   });
   
   export default router;

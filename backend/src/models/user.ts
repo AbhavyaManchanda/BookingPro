@@ -15,7 +15,10 @@ const userSchema=new mongoose.Schema({
     firstName:{type:String,required:true},
     lastName:{type:String,required:true},
 });
-//middleware
+
+
+//middleware for MONGODB
+//if the password has changed then bcrypt it to hash it
 userSchema.pre("save",async function(next){
     if(this.isModified('password')){
         this.password=await bcrypt.hash(this.password,8)
