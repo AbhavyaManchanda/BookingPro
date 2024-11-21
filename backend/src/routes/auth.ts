@@ -14,21 +14,25 @@ router.post("/login",[
     check("password", "Password with 6 or more characters required").isLength({
       min: 6,
     }),
-],async(req: Request, res: Response)=>{
+],async(req: Request, res: Response)=>{//funct to handle requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
 }
-const { email, password } = req.body;
+
+const { email, password } = req.body;//de-structuring the email and password from the request body
 
 try {
+  //fetching the user
     const user = await User.findOne({ email });
-    if (!user) {
+    if (!user) { //if user dosn't exist
       return res.status(400).json({ message: "Invalid Credentials" });
     }
+
+    //comparing the password
     // to check the password we send for the req matches the password we have for user 
-    
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }

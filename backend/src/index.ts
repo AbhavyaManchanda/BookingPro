@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
-app.use("/api/auth",authRoutes);
+app.use("/api/auth",authRoutes);//login me authorization ki jarurat hoti hai is liye usko auth routes me register karna hai
 app.use("/api/users",userRoutes);
 //if any request comes into api that are prefixed with api/users,pass the request to the usersRoutes
 
