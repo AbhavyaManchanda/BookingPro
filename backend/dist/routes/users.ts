@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 //  import verifyToken from "../middleware/auth";
 const router = express.Router();
+
 router.post("/register", [
     check("firstName", "First Name is required").isString(),
     check("lastName", "Last Name is required").isString(),
@@ -27,7 +28,8 @@ router.post("/register", [
         }
         user = new User(req.body);
         await user.save();
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
+        
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY as string, { expiresIn: "1d" });
         res.cookie("auth_token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",

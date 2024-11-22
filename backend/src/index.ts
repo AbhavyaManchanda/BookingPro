@@ -15,7 +15,11 @@ mongoose.connect("mongodb+srv://manchandakhushi14:^vvrulc2q@booking-app-db.cjvo4
 const app=express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(cors())
+app.use(cors({
+    origin:process.env.FRONTEND_URL,
+    credentials:true,
+})
+);
 
 app.use("/api/auth",authRoutes);//login me authorization ki jarurat hoti hai is liye usko auth routes me register karna hai
 app.use("/api/users",userRoutes);

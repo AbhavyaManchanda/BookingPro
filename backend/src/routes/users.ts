@@ -58,7 +58,7 @@ async (req: Request, res: Response) => {
             secure:process.env.NODE_ENV==="production",//ensures the cookie is only sent over HTTPS in production.
             maxAge:86400000,
         })
-        return res.sendStatus(200);
+        return res.status(200).send({message:"User registered OK"})
 
 
      }catch(error){
