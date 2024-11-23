@@ -1,21 +1,27 @@
-import { useEffect } from "react";
+import { useEffect } from "react";//side effects ko manage karta hai(timers)
 
+
+//type definition for the props that the Toast component will accept
 type ToastProps = {
   message: string;
   type: "SUCCESS" | "ERROR";
-  onClose: () => void;
+  onClose: () => void;    //Toast close hone ka handler
 };
 
+
+
 const Toast = ({ message, type, onClose }: ToastProps) => {
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 5000);//5 sec
+    }, 3000);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer); // ensure karta hai ki agar component unmount ho gaya, to timer clear ho jaye
     };
   }, [onClose]);
+
 
   const styles =
     type === "SUCCESS"

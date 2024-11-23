@@ -23,21 +23,22 @@ const Register = () => {
 
 
   const {
-    register,
-    watch,
+    register,//binds the form fields
+    watch,//watches their values
     handleSubmit,
-    formState: { errors },
+    formState: { errors },//Errors during validation are stored
   } = useForm<RegisterFormData>();
 
   //linking the form to the handler
+  //handleSubmit -- to validate the form data before submission.
     const onSubmit = handleSubmit((data) => {
-    mutation.mutate(data);
+    mutation.mutate(data);//POST request server tak jaata hai data
     });
 
 
 
     const mutation=useMutation(apiClient.register,{
-      onSuccess: () => {
+      onSuccess: () => {//callback hai
         showToast({message:"registration successfull",type:"SUCCESS"});
         navigate("/");
     },
@@ -46,6 +47,7 @@ const Register = () => {
 
     },
     });
+
 
 
   return (

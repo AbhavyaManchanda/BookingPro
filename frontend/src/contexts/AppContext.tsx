@@ -3,27 +3,33 @@ import * as apiClient from '../api-client';
 import Toast from "../components/Toast";
 import { useQuery } from "react-query";
 
+
+
 type ToastMessage={
     message:string;
     type:"SUCCESS"|"ERROR";
 }
+
 
 type AppContext={
     showToast:(toastMessage:ToastMessage)=>void;
     isLoggedIn: boolean;
 }
 
+
+
 const AppContext=React.createContext<AppContext|undefined>(undefined);
 
 
-export const AppContextProvider = ({
-    children,
-  }: {
+
+export const AppContextProvider = ({children}: {
     children: React.ReactNode;
-  }) => {
+    }) => {
+
+//toast ek state variable hai jo notification ke liye ToastMessage object ko store karega.
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
   
-
+//Backend se token validation ke liye useQuery call ho raha hai.
     const { isError } = useQuery("validateToken", apiClient.validateToken, {
       retry: false,
     });
@@ -47,6 +53,8 @@ export const AppContextProvider = ({
       </AppContext.Provider>
     );
   };
+
+  
 
 export const useAppContext=()=>{
     const context = useContext(AppContext);
