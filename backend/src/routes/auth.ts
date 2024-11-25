@@ -3,13 +3,14 @@ import {check,validationResult} from "express-validator";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-// import verifyToken from "../middleware/auth";
+import verifyToken from "../middleware/auth";
 
 
 
 const router =express.Router();
 
-router.post("/login",[  
+router.post("/login",
+  [  
     check("email", "Email is required").isEmail(),
     check("password", "Password with 6 or more characters required").isLength({
       min: 6,
@@ -20,7 +21,8 @@ router.post("/login",[
       return res.status(400).json({ message: errors.array() });
 }
 
-const { email, password } = req.body;//de-structuring the email and password from the request body
+const { email, password } = req.body;
+//de-structuring the email and password from the request body
 
 try {
   //fetching the user
@@ -61,15 +63,16 @@ try {
 }
 );
 
-// router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
-//     res.status(200).send({ userId: req.userId });
-//   });
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+    res.status(200).send({ userId: req.userId });
+  });
   
-//   router.post("/logout", (req: Request, res: Response) => {
-//     res.cookie("auth_token", "", {
-//       expires: new Date(0),
-//     });
-//     res.send();
-//   });
+
+  router.post("/logout", (req: Request, res: Response) => {
+    res.cookie("auth_token", "", {
+      expires: new Date(0),
+    });
+    res.send();
+  });
   
   export default router;

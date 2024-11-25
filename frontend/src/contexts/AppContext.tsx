@@ -28,6 +28,7 @@ export const AppContextProvider = ({children}: {
 
 //toast ek state variable hai jo notification ke liye ToastMessage object ko store karega.
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
+    
   
 //Backend se token validation ke liye useQuery call ho raha hai.
     const { isError } = useQuery("validateToken", apiClient.validateToken, {
@@ -36,12 +37,14 @@ export const AppContextProvider = ({children}: {
 
   
     return (
-      <AppContext.Provider value={{
+      <AppContext.Provider 
+      value={{
         showToast: (toastMessage) =>{
             setToast(toastMessage)
         },
         isLoggedIn: !isError,
-      }}>
+      }}
+      >
         {toast && (
             <Toast 
             message={toast.message} 
