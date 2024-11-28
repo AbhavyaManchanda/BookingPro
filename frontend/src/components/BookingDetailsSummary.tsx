@@ -1,4 +1,3 @@
-
 import { HotelType } from "../../../backend/src/shared/Types";
 
 type Props = {

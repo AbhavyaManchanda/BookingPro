@@ -7,6 +7,9 @@ import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
 import { PaymentIntentResponse, UserType } from "../../../../backend/src/shared/Types";
+ 
+
+
 
 type Props = {
   currentUser: UserType;
@@ -47,6 +50,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     }
   );
 
+  
   const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {
       firstName: currentUser.firstName,
@@ -77,6 +81,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
     }
   };
+
+   
 
   return (
     <form

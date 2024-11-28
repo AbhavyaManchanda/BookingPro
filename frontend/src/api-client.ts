@@ -240,7 +240,7 @@ export const signOut = async () => {
   
   export const createRoomBooking = async (formData: BookingFormData) => {
     const response = await fetch(
-      `${API_BASE_URL}/api/hotels/${formData.hotelId}/booking`,
+      `${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`,
       {
         method: "POST",
         headers: {
