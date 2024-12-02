@@ -38,8 +38,8 @@ router.post("/",
           .isArray()
           .withMessage("Facilities are required"),
       ],
-     upload.array("imageFiles",6),
-    async(req:Request,res:Response)=>{
+        upload.array("imageFiles",6),
+        async(req:Request,res:Response)=>{
         try{
             const imageFiles=req.files as Express.Multer.File[];
             const newHotel:HotelType=req.body;
