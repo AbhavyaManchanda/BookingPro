@@ -6,6 +6,11 @@ type Props = {
 };
 
 const FacilitiesFilter = ({ selectedFacilities, onChange }: Props) => {
+
+  // if(!selectedFacilities){
+  //   return <span> No Hotels Found</span>
+  // }
+
   return (
     <div className="border-b border-slate-300 pb-5">
       <h4 className="text-md font-semibold mb-2">Facilities</h4>

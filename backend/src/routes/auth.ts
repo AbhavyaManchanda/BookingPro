@@ -27,6 +27,7 @@ const { email, password } = req.body;
 try {
   //fetching the user
     const user = await User.findOne({ email });
+
     if (!user) { //if user dosn't exist
       return res.status(400).json({ message: "Invalid Credentials" });
     }
@@ -63,12 +64,16 @@ try {
 }
 );
 
+
+
 router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
     res.status(200).send({ userId: req.userId });
   });
   
 
-  router.post("/logout", (req: Request, res: Response) => {
+
+
+router.post("/logout", (req: Request, res: Response) => {
     res.cookie("auth_token", "", {
       expires: new Date(0),
     });

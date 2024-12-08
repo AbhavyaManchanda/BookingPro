@@ -23,7 +23,8 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-
+    
+      //decode and validate the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string); //checks validity of token
 
     req.userId = (decoded as JwtPayload).userId;
