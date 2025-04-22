@@ -3,7 +3,8 @@ import  ReactDOM  from 'react-dom/client';// manage rendering React components i
  
 import './index.css'
 import App from './App.tsx'
-import { QueryClient, QueryClientProvider } from 'react-query' //query==api calls     react-query controls data fetching
+import { QueryClient, QueryClientProvider } from 'react-query' //query==api calls     
+//react-query controls data fetching
 import { AppContextProvider } from './contexts/AppContext.tsx'
 import { SearchContextProvider } from './contexts/SearchContexts.tsx';
 
@@ -17,7 +18,7 @@ const queryClient =new QueryClient({
 
 //rendering the app
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  //React.StrictMode: For dev warnings.
+//React.StrictMode: For dev warnings.
 //QueryClientProvider: To manage API calls.
 //AppContextProvider: To share global state.
 

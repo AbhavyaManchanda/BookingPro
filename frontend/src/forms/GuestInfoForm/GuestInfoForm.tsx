@@ -69,11 +69,13 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
       <h3 className="text-md font-bold">Rs{pricePerNight}</h3>
+
       <form
         onSubmit={
           isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
         }
       >
+
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>
             <DatePicker
@@ -90,6 +92,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               wrapperClassName="min-w-full"
             />
           </div>
+
           <div>
             <DatePicker
               required
@@ -105,6 +108,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               wrapperClassName="min-w-full"
             />
           </div>
+
           <div className="flex bg-white px-2 py-1 gap-2">
             <label className="items-center flex">
               Adults:
@@ -123,6 +127,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 })}
               />
             </label>
+
             <label className="items-center flex">
               Children:
               <input
@@ -135,12 +140,16 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 })}
               />
             </label>
+
+
+                  
             {errors.adultCount && (
               <span className="text-red-500 font-semibold text-sm">
                 {errors.adultCount.message}
               </span>
             )}
           </div>
+
           {isLoggedIn ? (
             <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
               Book Now
@@ -150,6 +159,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               Sign in to Book
             </button>
           )}
+
         </div>
       </form>
     </div>

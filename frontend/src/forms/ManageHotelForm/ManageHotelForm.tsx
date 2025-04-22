@@ -6,6 +6,7 @@ import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 import { HotelType } from "../../../../backend/src/shared/Types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export type HotelFormData = {
@@ -32,6 +33,7 @@ type Props = {
 const ManageHotelForm=({onSave,isLoading,hotel}:Props)=>{
     const formMethods=useForm<HotelFormData>();
     const {handleSubmit,reset}=formMethods;
+    const navigate = useNavigate();
 
     useEffect(()=>{
       reset(hotel);
@@ -70,6 +72,7 @@ const ManageHotelForm=({onSave,isLoading,hotel}:Props)=>{
 
       
           onSave(formData);
+          navigate("/my-hotels");
     });
     return (
     <FormProvider {...formMethods}>
@@ -85,6 +88,7 @@ const ManageHotelForm=({onSave,isLoading,hotel}:Props)=>{
             type="submit" 
             className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500">
                 {isLoading?"Saving...":"Save"}
+
             </button>
         </span>
 

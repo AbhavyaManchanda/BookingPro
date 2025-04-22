@@ -29,6 +29,7 @@ export type BookingFormData = {
   totalCost: number;
 };
 
+
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -52,7 +53,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     }
   );
 
-  
+  //register:A function used to connect form inputs to the form state managed by useForm.
   const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {
       firstName: currentUser.firstName,
@@ -65,8 +66,10 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       hotelId: hotelId,
       totalCost: paymentIntent.totalCost,
       paymentIntentId: paymentIntent.paymentIntentId,
+      //An object containing payment details.
     },
   });
+
 
   const onSubmit = async (formData: BookingFormData) => {
     if (!stripe || !elements) {
@@ -78,6 +81,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
         card: elements.getElement(CardElement) as StripeCardElement,
       },
     });
+
 
     if (result.paymentIntent?.status === "succeeded") {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
@@ -104,6 +108,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             {...register("firstName")}
           />
         </label>
+
         <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
           <input
@@ -114,6 +119,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             {...register("lastName")}
           />
         </label>
+
         <label className="text-gray-700 text-sm font-bold flex-1">
           Email
           <input
